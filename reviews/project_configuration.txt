@@ -1,0 +1,3 @@
+https://start.spring.io/#!type=maven-project&language=java&platformVersion=3.0.2&packaging=jar&jvmVersion=19&groupId=com.ben&artifactId=reviews&name=reviews&description=Book%20Review%20Project&packageName=com.ben.reviews&dependencies=security,postgresql,devtools,web,data-jpa
+
+

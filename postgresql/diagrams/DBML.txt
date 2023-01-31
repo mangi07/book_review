@@ -1,0 +1,33 @@
+Table book {
+  id int
+  tite varchar
+  author varchar
+  description varchar
+  publication_date date
+  cover_image text
+  
+  author_id int [ref: > author.id]
+  Indexes {
+    (id) [pk]
+  }
+}
+
+Table author {
+  id int
+  full_name varchar
+  bio text
+  Indexes {
+    (id) [pk]
+  }
+}
+
+Table user {
+  id int
+  full_name varchar
+  password varchar
+  Indexes {
+    (id) [pk]
+  }
+}
+
+Ref: book.id <> user.id
