@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ben.reviews.User.User;
+import com.ben.reviews.User.UserRepository;
+
 import java.util.List;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
