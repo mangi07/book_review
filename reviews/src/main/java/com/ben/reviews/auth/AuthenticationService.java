@@ -6,7 +6,6 @@ import com.ben.reviews.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -23,16 +22,15 @@ public class AuthenticationService {
     record RegistrationConfirmation(String username, String message){}
 
     public AuthenticationResponse register(RegisterRequest request) throws ResponseStatusException {
-        String name = request.getName();
+        String name = request.getUsername();
         if (userRepository.existsByName(name)) {
-            //return new RegistrationConfirmation(name, "Error: Username already taken.");
             throw new ResponseStatusException(
                     HttpStatus.UNAUTHORIZED,
-                    "User already exists."
+                    "{\"error\":\"User already exists.\"}"
             );
         }
         var user = User.builder()
-                .name(request.getName())
+                .name(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         repository.save(user);
@@ -43,15 +41,28 @@ public class AuthenticationService {
                 .build();
     }
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getUsername(),
-                        request.getPassword()
-                )
-        );
-        var user = repository.findByName(request.getUsername())
-                .orElseThrow();
+    public AuthenticationResponse login(AuthenticationRequest request) throws ResponseStatusException {
+        String passwordFromRequest = request.getPassword();
+        var userName = request.getUsername();
+        // check name
+        if ( ! userRepository.existsByName(userName)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "User does not exists."
+            );
+        }
+        // assuming user will be found...
+        var user = userRepository.findByName(userName).get();
+        String passwordFromDbEncrypted = user.getPassword();
+        String passwordFromRequestEncrypted = passwordEncoder.encode(passwordFromRequest);
+        // check password
+        if ( ! passwordEncoder.matches(passwordFromRequest, passwordFromDbEncrypted) ) {
+            // here, the passwords do not match, so...
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Wrong password."
+            );
+        }
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse
                 .builder()

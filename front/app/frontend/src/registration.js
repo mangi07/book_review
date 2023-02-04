@@ -9,7 +9,7 @@ function Registration() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:3000/register', {
+      const response = await fetch('http://localhost:3000/auth/register', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -18,11 +18,12 @@ function Registration() {
       });
       const responseData = await response.json();
       if (response.status === 200) {
-				// TODO: store JWT
-				
+				// store JWT
+				localStorage.setItem("token", responseData.token);
         navigate('/welcome');
       } else {
-        setError(responseData.message);
+        //setError(responseData.message);
+				setError(response);
       }
     } catch (err) {
       setError(err.message);
@@ -37,8 +38,8 @@ function Registration() {
         <label>
           Name
           <input
-            name="name"
-            {...register("name",{
+            name="username"
+            {...register("username",{
               required: true,
               minLength: 8
             })}

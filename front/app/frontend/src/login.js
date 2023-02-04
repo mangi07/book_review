@@ -9,7 +9,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch('http://localhost:3000/auth/login', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {
@@ -18,7 +18,8 @@ function Login() {
       });
       const responseData = await response.json();
       if (response.status === 200) {
-				// TODO: store JWT
+				// store JWT
+				localStorage.setItem("token", responseData.token);
         navigate('/welcome');
       } else {
         setError(responseData.message);
@@ -36,8 +37,8 @@ function Login() {
         <label>
           Name
           <input
-            name="name"
-            {...register("name",{
+            name="username"
+            {...register("username",{
               required: true,
               minLength: 8
             })}

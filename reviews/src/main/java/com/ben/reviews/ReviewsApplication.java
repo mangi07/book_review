@@ -42,9 +42,9 @@ public class ReviewsApplication {
 	@GetMapping("/")
 	public GreetResponse hello() {
 		return new GreetResponse(
-				"hello",
+				"You are viewing this from a secure endpoint.",
 				List.of("one", "two", "three"),
-				new Person("Alex")
+				new Person("TODO")
 		);
 	}
 
