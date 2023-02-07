@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
 
 function Welcome() {
   const [error, setError] = useState(null);
   const message = async () => {
     try {
+			const token = localStorage.token;
       const response = await fetch('http://localhost:3000/', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-					'Authorization': 'Bearer {localStorage.token}'
+					'Authorization': 'Bearer {token}'
         }
       });
       const responseData = await response.json();
