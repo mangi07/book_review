@@ -1,0 +1,120 @@
+{
+  "ISBN:0201558025": {
+    "url": "https://openlibrary.org/books/OL1429049M/Concrete_mathematics",
+    "key": "/books/OL1429049M",
+    "title": "Concrete mathematics",
+    "subtitle": "a foundation for computer science",
+    "authors": [
+      {
+        "url": "https://openlibrary.org/authors/OL720958A/Ronald_L._Graham",
+        "name": "Ronald L. Graham"
+      },
+      {
+        "url": "https://openlibrary.org/authors/OL229501A/Donald_Knuth",
+        "name": "Donald Knuth"
+      },
+      {
+        "url": "https://openlibrary.org/authors/OL2669938A/Oren_Patashnik",
+        "name": "Oren Patashnik"
+      }
+    ],
+    "number_of_pages": 657,
+    "pagination": "xiii, 657 p. :",
+    "by_statement": "Ronald L. Graham, Donald E. Knuth, Oren Patashnik.",
+    "identifiers": {
+      "librarything": [
+        "45844"
+      ],
+      "wikidata": [
+        "Q15303722"
+      ],
+      "goodreads": [
+        "112243"
+      ],
+      "isbn_10": [
+        "0201558025"
+      ],
+      "lccn": [
+        "93040325"
+      ],
+      "openlibrary": [
+        "OL1429049M"
+      ]
+    },
+    "classifications": {
+      "lc_classifications": [
+        "QA39.2 .G733 1994",
+        "QA39.2.G733 1994"
+      ],
+      "dewey_decimal_class": [
+        "510"
+      ]
+    },
+    "publishers": [
+      {
+        "name": "Addison-Wesley"
+      }
+    ],
+    "publish_places": [
+      {
+        "name": "Reading, Mass"
+      }
+    ],
+    "publish_date": "1994",
+    "subjects": [
+      {
+        "name": "Computer science",
+        "url": "https://openlibrary.org/subjects/computer_science"
+      },
+      {
+        "name": "Mathematics",
+        "url": "https://openlibrary.org/subjects/mathematics"
+      },
+      {
+        "name": "Computer science, mathematics",
+        "url": "https://openlibrary.org/subjects/computer_science,_mathematics"
+      },
+      {
+        "name": "Algorithmes",
+        "url": "https://openlibrary.org/subjects/algorithmes"
+      },
+      {
+        "name": "Informatique",
+        "url": "https://openlibrary.org/subjects/informatique"
+      },
+      {
+        "name": "Algorithme",
+        "url": "https://openlibrary.org/subjects/algorithme"
+      },
+      {
+        "name": "Math\u00e9matiques pour informatique",
+        "url": "https://openlibrary.org/subjects/math\u00e9matiques_pour_informatique"
+      },
+      {
+        "name": "Calcul formel",
+        "url": "https://openlibrary.org/subjects/calcul_formel"
+      },
+      {
+        "name": "Programmation",
+        "url": "https://openlibrary.org/subjects/programmation"
+      },
+      {
+        "name": "Math\u00e9matiques",
+        "url": "https://openlibrary.org/subjects/math\u00e9matiques"
+      }
+    ],
+    "notes": "Includes bibliographical references (p. 604-631) and index.",
+    "ebooks": [
+      {
+        "preview_url": "https://archive.org/details/concretemathemat00grah_444",
+        "availability": "restricted",
+        "formats": {}
+      }
+    ],
+    "cover": {
+      "small": "https://covers.openlibrary.org/b/id/135182-S.jpg",
+      "medium": "https://covers.openlibrary.org/b/id/135182-M.jpg",
+      "large": "https://covers.openlibrary.org/b/id/135182-L.jpg"
+    }
+  }
+}

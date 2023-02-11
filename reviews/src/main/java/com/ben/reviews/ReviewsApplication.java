@@ -5,8 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.web.bind.annotation.*;
 
-import com.ben.reviews.user.User;
-import com.ben.reviews.user.UserRepository;
+import com.ben.reviews.models.user.User;
+import com.ben.reviews.models.user.UserRepository;
 
 import java.util.List;
 

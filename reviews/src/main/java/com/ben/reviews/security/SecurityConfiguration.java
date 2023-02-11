@@ -1,6 +1,6 @@
 package com.ben.reviews.security;
 
-import jakarta.servlet.Filter;
+import com.ben.reviews.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

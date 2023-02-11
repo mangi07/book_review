@@ -1,4 +1,4 @@
-package com.ben.reviews.auth;
+package com.ben.reviews.book_library;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class LibraryRequest {
 
-    private String username;
-    private String password;
+    private Integer bookId;
 }

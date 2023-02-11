@@ -1,4 +1,4 @@
-package com.ben.reviews.auth;
+package com.ben.reviews.security.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationRequest {
 
-    public String token;
+    private String username;
+    private String password;
 }

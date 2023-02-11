@@ -1,4 +1,4 @@
-package com.ben.reviews.user;
+package com.ben.reviews.models.user;
 
 import jakarta.persistence.*;
 import lombok.Builder;

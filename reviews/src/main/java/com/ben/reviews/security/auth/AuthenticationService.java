@@ -1,8 +1,9 @@
-package com.ben.reviews.auth;
+package com.ben.reviews.security.auth;
 
-import com.ben.reviews.security.JwtService;
-import com.ben.reviews.user.UserRepository;
-import com.ben.reviews.user.User;
+import com.ben.reviews.security.jwt.JwtService;
+import com.ben.reviews.models.user.UserRepository;
+import com.ben.reviews.models.user.User;
+import com.ben.reviews.security.register.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
