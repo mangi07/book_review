@@ -18,9 +18,8 @@ public class OpenBookServiceTests {
     private LibraryService service;
     @Test
     void assertTestTest() {
-        int isbn = 123;
-        LibraryRequest request = new LibraryRequest(123);
-        service.searchByIsbn(request);
+        String isbn = "123";
+        service.searchByIsbn(isbn);
         assertTrue(true);
     }
 }

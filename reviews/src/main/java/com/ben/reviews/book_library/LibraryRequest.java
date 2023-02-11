@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LibraryRequest {
 
-    private Integer bookId;
+    private String isbn ;
 }

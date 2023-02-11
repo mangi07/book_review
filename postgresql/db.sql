@@ -10,10 +10,11 @@ CREATE TABLE "author" (
 
 CREATE TABLE "book" (
   "id" INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  "isbn" VARCHAR UNIQUE,
   "title" VARCHAR,
   "author" VARCHAR,
   "description" VARCHAR,
-  "publication_date" DATE,
+  "publication_year" INTEGER,
   "cover_image" TEXT, -- URL of the cover image of the book
   "author_id" INT NOT NULL, 
   CONSTRAINT fk_author FOREIGN KEY("author_id") REFERENCES "author" ("id") -- one author can have many books (one-to-many)

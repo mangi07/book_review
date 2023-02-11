@@ -1,59 +1,75 @@
 package com.ben.reviews.book_library;
 
+import com.ben.reviews.book_search.OpenLibraryService;
+import com.ben.reviews.book_search.json_model.Book;
+import com.ben.reviews.models.author.Author;
+import com.ben.reviews.models.author.AuthorRepository;
 import com.ben.reviews.models.book.BookRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class LibraryService {
 
-    private final BookRepository repository;
+    private final BookRepository bookRepository;
+    private final AuthorRepository authorRepository;
+    private final OpenLibraryService openLibraryService;
 
 
-    public LibraryResponse addBook(LibraryRequest request) throws ResponseStatusException {
-        Integer bookId = request.getBookId();
-        if ( repository.findById(bookId).isEmpty() ) {
-        }
-        /*var user = User.builder()
-                .name(request.getUsername())
-                .password(passwordEncoder.encode(request.getPassword()))
+    public com.ben.reviews.models.book.Book prepareBookEntity(Book book){
+        Author author = Author.builder()
+                .name(book.getAuthors().get(0).getName().toString())
                 .build();
-        repository.save(user);
-        var jwtToken = jwtService.generateToken(user);*/
-
-        return LibraryResponse.builder()
-                //.token(jwtToken)
-                .token("filler")
+        String testTitle = book.getTitle();
+        String testAuthor = book.getAuthors().get(0).getName();
+        com.ben.reviews.models.book.Book bookEntity =
+                com.ben.reviews.models.book.Book
+                        .builder()
+                .isbn(book.getIsbn())
+                .title(testTitle)
+                .author(testAuthor)
+                .description(book.getNotes())
+                .publication_year(book.getPublish_date())
+                .cover_image(book.getCover().getMedium())
+                .author_obj(author)
                 .build();
+        return bookEntity;
     }
 
-    public LibraryResponse searchByIsbn(LibraryRequest request) throws ResponseStatusException {
-        /*String passwordFromRequest = request.getPassword();
-        var userName = request.getUsername();
-        // check name
-        if ( ! userRepository.existsByName(userName)) {
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    "User does not exists."
-            );
+    public com.ben.reviews.models.book.Book addBook(String isbn) throws ResponseStatusException {
+        boolean isEmpty = bookRepository.findByIsbn(isbn).isEmpty();
+        if ( isEmpty ) { // search book with api request
+            try {
+                Book book = openLibraryService.getBook(isbn);
+                com.ben.reviews.models.book.Book bookEntity = prepareBookEntity(book);
+                Author author = bookEntity.getAuthor_obj();
+                bookRepository.save(bookEntity);
+            } catch (Exception e) {
+                throw new ResponseStatusException(
+                        HttpStatus.EXPECTATION_FAILED,
+                        "{\"error\":\"Unable to find book from Open Book API with given ISBN number.\"}"
+                );
+            }
         }
-        // assuming user will be found...
-        var user = userRepository.findByName(userName).get();
-        String passwordFromDbEncrypted = user.getPassword();
-        String passwordFromRequestEncrypted = passwordEncoder.encode(passwordFromRequest);
-        // check password
-        if ( ! passwordEncoder.matches(passwordFromRequest, passwordFromDbEncrypted) ) {
-            // here, the passwords do not match, so...
-            throw new ResponseStatusException(
-                    HttpStatus.FORBIDDEN,
-                    "Wrong password."
-            );
+        return bookRepository.findByIsbn(isbn).get();
+    }
+
+    public LibraryResponse searchByIsbn(String isbn) throws ResponseStatusException {
+        com.ben.reviews.models.book.Book book;
+        Optional<com.ben.reviews.models.book.Book> bookOptional = bookRepository.findByIsbn(isbn);
+        if (bookOptional.isPresent()) {
+           book = bookOptional.get();
+        } else {
+            book = addBook(isbn);
         }
-        var jwtToken = jwtService.generateToken(user);*/
         return LibraryResponse
                 .builder()
+                .book(book)
                 .build();
     }
 }

@@ -20,6 +20,7 @@ public class OpenBookApi {
 
     private String uriStart = "https://openlibrary.org/api/books?bibkeys=ISBN:";
     private String uriTail = "&jscmd=data&format=json";
+    private HttpResponse<String> response;
 
 
     public static void main(String[] args) throws Exception {
@@ -38,15 +39,16 @@ public class OpenBookApi {
         return this.uriStart + isbn + this.uriTail;
     }
 
-    public Book mapToBook(String jsonStr) throws IOException {
+    public Book mapToBook(String jsonStr, String isbn) throws IOException {
         String jsonStrInner = jsonStr.substring(jsonStr.indexOf('{',1));
         String json = jsonStrInner.substring(0,jsonStrInner.length()-1);
         Gson gson = new Gson();
         Book apiBook = gson.fromJson(json, Book.class);
+        apiBook.setIsbn(isbn);
         return apiBook;
         //System.out.println(apiBook.authors.get(0).name);
     }
-    public String httpGetRequest(String isbn) throws URISyntaxException, IOException, InterruptedException {
+    public Book httpGetRequest(String isbn) throws URISyntaxException, IOException, InterruptedException {
         String misbn = this.buildGetUri(isbn);
 
         HttpClient client = HttpClient.newHttpClient();
@@ -55,18 +57,10 @@ public class OpenBookApi {
             .uri(URI.create(misbn))
             //.headers("Accept-Enconding", "gzip, deflate")
             .build();
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
+        this.response = client.send(request, BodyHandlers.ofString());
 
-        String responseBody = response.body();
-        mapToBook(responseBody);
-
-        int responseStatusCode = response.statusCode();
-
-
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("httpGetRequest: " + responseBody);
-        stringBuilder.append("httpGetRequest status code: " + responseStatusCode);
-        return stringBuilder.toString();
+        String responseBody = this.response.body();
+        return mapToBook(responseBody, isbn);
     }
 /*
     public static void httpPostRequest() throws URISyntaxException, IOException, InterruptedException {

@@ -1,5 +1,6 @@
 package com.ben.reviews.book_library;
 
+import com.ben.reviews.models.book.Book;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +12,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LibraryResponse {
 
-    public String token;
+    Book book;
 }

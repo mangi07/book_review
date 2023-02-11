@@ -1,6 +1,5 @@
 package com.ben.reviews.book_library;
 
-import com.ben.reviews.security.register.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,28 +11,13 @@ import org.springframework.web.bind.annotation.*;
 public class LibraryController {
 
     private final LibraryService service;
-    @GetMapping("/auth/testLibraryAdd")
-    public ResponseEntity<LibraryResponse> register(
-            @RequestBody LibraryRequest request
+
+    @GetMapping("/search/{isbn}")
+    public ResponseEntity<LibraryResponse> testLibraryAdd(
+            @PathVariable("isbn") String isbnParam
     ) {
-       return ResponseEntity.ok(service.addBook(request));
+       return ResponseEntity.ok(service.searchByIsbn(isbnParam));
     }
 
-    /*
-    @PostMapping("/auth/login")
-    public ResponseEntity<LibraryResponse> login(
-            @RequestBody LibraryRequest request
-    ) {
-        return ResponseEntity.ok(service.login(request));
-    }
-
-    @GetMapping("/userinfo")
-    public ResponseEntity<LibraryResponse> testLoggedInUser(
-            @RequestBody LibraryRequest request
-    ) {
-        // TODO: return user info here, instead
-        return ResponseEntity.ok(service.login(request));
-    }
-     */
 
 }
