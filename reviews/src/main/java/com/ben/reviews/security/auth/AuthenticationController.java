@@ -1,6 +1,5 @@
 package com.ben.reviews.security.auth;
 
-import com.ben.reviews.security.register.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

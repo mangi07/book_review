@@ -9,7 +9,7 @@ public class Book {
     String title;
     List<Author> authors;
     String notes; // to be mapped to DB "description"
-    Integer publish_date;
+    String publish_date;
     Cover cover;
     String isbn;
 

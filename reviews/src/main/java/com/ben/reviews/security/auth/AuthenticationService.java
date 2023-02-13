@@ -3,10 +3,8 @@ package com.ben.reviews.security.auth;
 import com.ben.reviews.security.jwt.JwtService;
 import com.ben.reviews.models.user.UserRepository;
 import com.ben.reviews.models.user.User;
-import com.ben.reviews.security.register.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,9 +16,7 @@ public class AuthenticationService {
     private final UserRepository repository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
-    private final AuthenticationManager authManager;
     private final UserRepository userRepository;
-    record RegistrationConfirmation(String username, String message){}
 
     public AuthenticationResponse register(RegisterRequest request) throws ResponseStatusException {
         String name = request.getUsername();
@@ -39,6 +35,7 @@ public class AuthenticationService {
 
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .user(user.getName())
                 .build();
     }
 
@@ -55,7 +52,6 @@ public class AuthenticationService {
         // assuming user will be found...
         var user = userRepository.findByName(userName).get();
         String passwordFromDbEncrypted = user.getPassword();
-        String passwordFromRequestEncrypted = passwordEncoder.encode(passwordFromRequest);
         // check password
         if ( ! passwordEncoder.matches(passwordFromRequest, passwordFromDbEncrypted) ) {
             // here, the passwords do not match, so...
@@ -68,6 +64,7 @@ public class AuthenticationService {
         return AuthenticationResponse
                 .builder()
                 .token(jwtToken)
+                .user(user.getName())
                 .build();
     }
 }

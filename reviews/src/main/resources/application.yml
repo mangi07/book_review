@@ -3,6 +3,8 @@ server:
   error:
     whitelabel:
       enabled: false
+    include-message: ALWAYS
+    include-stacktrace: NEVER
 
 spring:
   datasource:

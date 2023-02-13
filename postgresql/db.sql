@@ -14,7 +14,7 @@ CREATE TABLE "book" (
   "title" VARCHAR,
   "author" VARCHAR,
   "description" VARCHAR,
-  "publication_year" INTEGER,
+  "publication_date" VARCHAR,
   "cover_image" TEXT, -- URL of the cover image of the book
   "author_id" INT NOT NULL, 
   CONSTRAINT fk_author FOREIGN KEY("author_id") REFERENCES "author" ("id") -- one author can have many books (one-to-many)
@@ -30,9 +30,10 @@ CREATE TABLE "user" (
 CREATE TABLE "user_book" (
   -- "id" INT NOT NULL PRIMARY KEY,
   "id" INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  "user_id" INT  NOT NULL,
-  "book_id" INT REFERENCES "book" ("id") NOT NULL,
-  "review" TEXT NOT NULL, -- user's book review
+  "user_id" INT NOT NULL,
+  "book_id" INT NOT NULL,
+  "review" TEXT, -- user's book review can optionally be filled in later
+  "rating" INT,   -- user's rating in conjunction with the review, also optional, numbering system dictated by application logic
   CONSTRAINT fk_user FOREIGN KEY("user_id") REFERENCES "user" ("id"),
   CONSTRAINT fk_book FOREIGN KEY("book_id") REFERENCES "book" ("id")
 );

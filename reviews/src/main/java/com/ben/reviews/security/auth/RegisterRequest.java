@@ -1,4 +1,4 @@
-package com.ben.reviews.security.register;
+package com.ben.reviews.security.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -2,14 +2,18 @@ package com.ben.reviews.models.book;
 
 import com.ben.reviews.models.author.Author;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity(name = "book")
 public class Book {
@@ -20,7 +24,7 @@ public class Book {
     private String author;
     private String title;
     private String description;
-    private Integer publication_year;
+    private String publication_date;
     private String cover_image;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")

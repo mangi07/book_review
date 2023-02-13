@@ -19,7 +19,8 @@ public class JwtService {
 
     private static final String KEY = "4A614E635266556A586E3272357538782F413F4428472B4B6250655367566B59";
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        String claim = extractClaim(token, Claims::getSubject);
+        return claim;
     }
 
     public String generateToken(UserDetails userDetails) {
