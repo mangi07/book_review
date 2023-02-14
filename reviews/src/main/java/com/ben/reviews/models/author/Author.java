@@ -1,11 +1,12 @@
 package com.ben.reviews.models.author;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.ben.reviews.models.book.Book;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
@@ -20,4 +21,7 @@ public class Author {
     private Integer id;
     private String name;
     private String bio;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author_obj")
+    private List<Book> books;
 }

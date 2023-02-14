@@ -1,0 +1,24 @@
+package com.ben.reviews.models.book;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
+import java.util.List;
+
+public class CustomBookRepositoryImp implements CustomBookRepository {
+
+    @PersistenceContext
+    private EntityManager entityManager;
+
+    @Override
+    public List<Book> customFindMethod(Integer userId) {
+        String query =
+                "select * from book" +
+                "inner join user_book on user_book.book_id = book.id" +
+                "inner join public.user on user_book.user_id = public.user.id" +
+                "where public.user.id = :userId";
+        return (List<Book>) entityManager.createQuery(query)
+                .setParameter("userId", userId)
+                .getResultList();
+    }
+}

@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,9 +153,29 @@ public class LibraryService {
     public ReviewsResponse listReviews(String isbn, String jwt) {
         com.ben.reviews.models.book.Book book = this.getBook(isbn);
         Integer bookId = book.getId();
+        // Lists reviews for given book:
         List<UserBook> userBookList = userBookRepository.findByReviewIsNotNullAndBookIdEquals(bookId);
         // TODO: figure out inner join to get usernames of the reviews
 
         return ReviewsResponse.builder().bookReviews(userBookList).build();
+    }
+
+    public LibraryBooksResponse listLibraryBooks(String jwt) {
+        String username = jwtService.extractUsername(jwt);
+        Integer userId = userRepository.findByName(username).get().getId();
+
+        // TODO: figure out how to get all books in user's library
+        //List<com.ben.reviews.models.book.Book> books = bookRepository.customFindMethod(userId);
+        List<UserBook> userBookList = userBookRepository.findByUserId(userId);
+        List<Integer> bookIds = new ArrayList<>();
+        for ( UserBook userBook : userBookList ) {
+            bookIds.add(userBook.getBookId());
+        }
+        //List<com.ben.reviews.models.book.Book> books = bookRepository.customFindMethod(userId);
+        List<com.ben.reviews.models.book.Book> books = bookRepository.findByIdIn(bookIds);
+
+        return LibraryBooksResponse.builder()
+                .books(books)
+                .build();
     }
 }

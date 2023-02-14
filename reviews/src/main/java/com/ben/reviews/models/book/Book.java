@@ -26,7 +26,8 @@ public class Book {
     private String description;
     private String publication_date;
     private String cover_image;
-    @ManyToOne(cascade = CascadeType.ALL)
+    //TODO: cannot get this field populated
+    @ManyToOne(/*fetch = FetchType.LAZY,*/ cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
     private Author author_obj;
 }

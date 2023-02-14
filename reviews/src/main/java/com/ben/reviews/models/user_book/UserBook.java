@@ -1,5 +1,6 @@
 package com.ben.reviews.models.user_book;
 
+import com.ben.reviews.models.book.Book;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,9 @@ public class UserBook{
     private Integer userId;
     @Column(name = "book_id")
     private Integer bookId;
+    //@ManyToOne(fetch = FetchType.LAZY, optional = false)
+    //@JoinColumn(name = "book_id", insertable = false, updatable = false)
+    //private Book book;
     private String review;
     private Integer rating;
 }

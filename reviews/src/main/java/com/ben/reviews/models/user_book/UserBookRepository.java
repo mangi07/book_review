@@ -11,5 +11,6 @@ public interface UserBookRepository extends JpaRepository<UserBook, Integer> {
       Optional<UserBook> findByUserIdAndBookId(Integer userId, Integer bookId);
       //To be used to find all reviews for a book
       List<UserBook> findByReviewIsNotNullAndBookIdEquals(Integer bookID);
+      List<UserBook> findByUserId(Integer userId);
 
 }

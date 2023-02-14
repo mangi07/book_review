@@ -1,0 +1,7 @@
+package com.ben.reviews.models.book;
+
+import java.util.List;
+
+public interface CustomBookRepository {
+    List<Book> customFindMethod(Integer userId);
+}

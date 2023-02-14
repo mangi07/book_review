@@ -48,5 +48,12 @@ public class LibraryController {
         String jwt = jwtHeader.substring(7); // remove "Bearer " to get jwt
         return ResponseEntity.ok(service.listReviews(isbnParam, jwt));
     }
+    @GetMapping("/library/{username}")
+    public ResponseEntity<LibraryBooksResponse> listReviews(
+            @RequestHeader (name="Authorization") String jwtHeader
+    ) {
+        String jwt = jwtHeader.substring(7); // remove "Bearer " to get jwt
+        return ResponseEntity.ok(service.listLibraryBooks(jwt));
+    }
 
 }
