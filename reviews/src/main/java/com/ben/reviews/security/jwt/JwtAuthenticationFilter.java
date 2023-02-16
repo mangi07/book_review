@@ -31,6 +31,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String username;
+        //response.setHeader("Access-Control-Allow-Credentials","true");
+        //response.setHeader("Access-Control-Allow-Origin","http://localhost:3001");
+        //response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        //response.setHeader("Vary","Origin,Access-Control-Request-Headers,Access-Control-Request-Method");
+        //response.setHeader("Vary","Access-Control-Request-Headers");
+        //response.setHeader("Vary","Access-Control-Request-Method");
+        //response.setHeader("Access-Control-Allow-Origin","http://localhost:3001");
+        //response.setHeader("Access-Control-Allow-Headers","Authorization, Content-Type");
         if (authHeader == null || !authHeader.startsWith("Bearer ")){
             filterChain.doFilter(request, response);
             return;

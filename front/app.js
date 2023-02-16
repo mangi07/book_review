@@ -10,6 +10,7 @@ class App extends React.Component {
       <Router>
         <Route exact path="/" component={Registration} />
         <Route exact path="/welcome" component={Welcome} />
+        <Route exact path="/search" component={Search} />
       </Router>
     )
   }

@@ -20,7 +20,9 @@ function Login() {
       if (response.status === 200) {
 				// store JWT
 				localStorage.setItem("token", responseData.token);
-        navigate('/welcome');
+
+				const username = responseData.user;
+        navigate('/welcome', { state: { username } });
       } else {
         setError(responseData.message);
       }
@@ -40,7 +42,7 @@ function Login() {
             name="username"
             {...register("username",{
               required: true,
-              minLength: 8
+              minLength: 3
             })}
           />
         </label>
@@ -51,7 +53,7 @@ function Login() {
             name="password"
             {...register("password",{
               required: true,
-              minLength: 8
+              minLength: 4
             })}
           />
         </label>

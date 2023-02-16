@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 function Welcome() {
   const [error, setError] = useState(null);
+	const { state } = useLocation();
+	const { username } = state || {};
   const message = async () => {
     try {
 			const token = localStorage.token;
@@ -9,7 +12,7 @@ function Welcome() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-					'Authorization': 'Bearer {token}'
+					'Authorization': `Bearer ${token}`
         }
       });
       const responseData = await response.json();
@@ -27,8 +30,9 @@ function Welcome() {
   return (
     <div>
       {error && <p>{error}</p>}
-      <h1>Welcome</h1>
+      <h1>Welcome, { username }!</h1>
       <p>{message}</p>
+      <Link to="/search">Search</Link>
     </div>
   );
 }

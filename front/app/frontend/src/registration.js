@@ -41,7 +41,7 @@ function Registration() {
             name="username"
             {...register("username",{
               required: true,
-              minLength: 8
+              minLength: 3
             })}
           />
         </label>
@@ -52,7 +52,7 @@ function Registration() {
             name="password"
             {...register("password",{
               required: true,
-              minLength: 8
+              minLength: 4
             })}
           />
         </label>
