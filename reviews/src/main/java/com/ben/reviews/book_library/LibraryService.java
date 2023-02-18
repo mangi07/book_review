@@ -79,12 +79,16 @@ public class LibraryService {
         return book;
     }
 
-    public LibraryResponse searchByIsbn(String isbn) throws ResponseStatusException {
+    public LibraryResponse searchByIsbn(String isbn, String jwt) throws ResponseStatusException {
         com.ben.reviews.models.book.Book book = this.getBook(isbn);
+
+        Optional<UserBook> userBookOptional = this.findUserBook(jwt, isbn);
+        boolean bookInUserLibrary = userBookOptional.isPresent();
 
         return LibraryResponse
                 .builder()
                 .book(book)
+                .inLibrary(bookInUserLibrary)
                 .build();
     }
 

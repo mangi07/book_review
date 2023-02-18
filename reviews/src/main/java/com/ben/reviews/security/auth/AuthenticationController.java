@@ -26,11 +26,9 @@ public class AuthenticationController {
     }
 
     @GetMapping("/userinfo")
-    public ResponseEntity<AuthenticationResponse> testLoggedInUser(
-            @RequestBody AuthenticationRequest request
-    ) {
-        // TODO: return user info here, instead
-        return ResponseEntity.ok(service.login(request));
+    public ResponseEntity<AuthenticationResponse> testLoggedInUser( ) {
+        // error thrown and 403 response if JWT is expired, else 200 response:
+        return ResponseEntity.ok().build();
     }
 
 }

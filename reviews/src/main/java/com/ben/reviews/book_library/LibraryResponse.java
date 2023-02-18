@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class LibraryResponse {
 
     Book book;
+    Boolean inLibrary;
 }

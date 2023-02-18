@@ -31,7 +31,8 @@ Example response 1:
     "publication_date": "1994",
     "cover_image": "https://covers.openlibrary.org/b/id/135182-M.jpg",
     "author_obj": {}
-  }
+  },
+  "inLibrary": false
 }
 ```
 
@@ -54,7 +55,8 @@ Example response 2:
     "publication_date": "July 2008",
     "cover_image": "https://covers.openlibrary.org/b/id/8085499-M.jpg",
     "author_obj": {}
-  }
+  },
+  "inLibrary": true
 }
 ```
 ### Add Book to Logged-In User's Library:

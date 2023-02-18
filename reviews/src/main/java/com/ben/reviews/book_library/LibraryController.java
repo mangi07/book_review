@@ -14,9 +14,11 @@ public class LibraryController {
 
     @GetMapping("/search/{isbn}")
     public ResponseEntity<LibraryResponse> addBook(
-            @PathVariable("isbn") String isbnParam
+            @PathVariable("isbn") String isbnParam,
+            @RequestHeader (name="Authorization") String jwtHeader
     ) {
-       return ResponseEntity.ok(service.searchByIsbn(isbnParam));
+       String jwt = jwtHeader.substring(7); // remove "Bearer " to get jwt
+       return ResponseEntity.ok(service.searchByIsbn(isbnParam, jwt));
     }
 
     @GetMapping("/add/{isbn}")

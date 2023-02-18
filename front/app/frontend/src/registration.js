@@ -20,9 +20,9 @@ function Registration() {
       if (response.status === 200) {
 				// store JWT
 				localStorage.setItem("token", responseData.token);
-        navigate('/welcome');
+				const username = responseData.user;
+        navigate('/welcome', { state: { username }});
       } else {
-        //setError(responseData.message);
 				setError(response);
       }
     } catch (err) {
